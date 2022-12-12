@@ -5,7 +5,6 @@ const months = ["January", "February", "March", "April", "May", "June", "July", 
 
 const getRamalanCuaca = async () => {
   const resp = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=jakarta&appid=${process.env.OPEN_WEATHER_API}&units=metric`);
-  console.log("Weather Forecast: ");
   const dataCuaca = {};
   resp.data.list.forEach((data) => {
     const d = new Date(Number(`${data.dt}000`));
@@ -18,9 +17,8 @@ const getRamalanCuaca = async () => {
     const cuacaString = dayName + ", " + date + " " + monthName + " " + year + ": " + temp + " Celcius";
     dataCuaca[dayName] = cuacaString;
   });
-  const dataCuacaArray = Object.values(dataCuaca);
-  const data5days = dataCuacaArray.slice(dataCuacaArray.length - 5);
-  data5days.forEach((data) => console.log(data));
+  console.log("Weather Forecast: ");
+  Object.values(dataCuaca).forEach((data) => console.log(data));
 };
 
 getRamalanCuaca();
